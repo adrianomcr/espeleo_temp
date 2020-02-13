@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<launch>
+
+
+
+<!--Run the rviz for better visualization-->
+<!-- <node pkg = "rviz" name = "rviz" type = "rviz" args="-d $(find espeleo_temp)/rviz/config_temp.rviz" output="screen">
+</node> -->
+
+
+<!--Run the node that plots stuff on rviz-->
+<!--node pkg = "espeleo_localization" name = "state_estimator_espeleo" type = "state_estimator_espeleo" args="" output="screen">
+</node-->
+<node pkg = "espeleo_localization" name = "state_estimator_decawave" type = "state_estimator_decawave" args="" output="screen">
+  <rosparam command="load" file="$(find espeleo_temp)/config/EKF_params_decawave.yaml" />
+  <param name="log_path" type="string" value="$(find espeleo_temp)/log_files/" />
+</node>
+
+
+<!--Run the node that controls the robot with vector fields -->
+<node pkg = "espeleo_control" name = "vector_field" type = "vec_field_control.py" args="" output="screen">
+	<rosparam command="load" file="$(find espeleo_control)/config/control_params.yaml" />
+</node>
+
+
+
+
+
+</launch>
