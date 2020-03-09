@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<launch>
+
+
+<!--PLAY BAG FILE-->
+<node pkg = "rosbag" name = "bag_node" type = "play" args="$(find espeleo_temp)/bags/200212_163110_corredor_full.bag -r 1" output="screen" launch-prefix="xterm -e">
+</node>
+
+
+
+
+<!--Run the rviz for better visualization-->
+<node pkg = "rviz" name = "rviz" type = "rviz" args="-d $(find espeleo_temp)/rviz/config_temp.rviz" output="screen">
+</node>
+
+
+<!--Run the node that plots stuff on rviz-->
+<!--node pkg = "espeleo_localization" name = "state_estimator_espeleo" type = "state_estimator_espeleo" args="" output="screen">
+</node-->
+<!-- <node pkg = "espeleo_localization" name = "state_estimator_decawave" type = "state_estimator_decawave" args="" output="screen">
+  <rosparam command="load" file="$(find espeleo_temp)/config/EKF_params_decawave.yaml" />
+  <param name="log_path" type="string" value="$(find espeleo_temp)/log_files/" />
+</node> -->
+
+
+
+<!--node pkg="tf" type="static_transform_publisher" name="br_realsense" args="0 0 0 0 0 0 /world /realsense_odom_frame 11"/-->
+
+<!-- <node pkg="tf"
+      type="static_transform_publisher"
+      name="br_realsense"
+      args="0 0 0 0 0 0 world realsense_odom_frame 11" /> -->
+
+<!--remap from="chatter" to="hello"/-->
+
+
+
+</launch>
